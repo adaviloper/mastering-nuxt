@@ -1,0 +1,15 @@
+{
+  "name": "mastering-nuxt",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "development": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nuxt": "^2.14.7"
+  }
+}
