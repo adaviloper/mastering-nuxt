@@ -3,14 +3,15 @@ export default function (context, inject) {
   let waiting = [];
 
   addScript();
+
   inject('maps', {
     showMap,
     makeAutoComplete,
-  })
+  });
 
   function addScript() {
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${context.env.googlePlacesAPIKey}&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${context.env.googlePlacesAPIKey}&libraries=places&callback=initGoogleMaps`;
     script.async = true;
 
     window.initGoogleMaps = initGoogleMaps;
@@ -34,6 +35,7 @@ export default function (context, inject) {
         fn: makeAutoComplete,
         arguments,
       })
+      return;
     }
 
     const autoComplete = new window.google.maps.places.Autocomplete(input, {
@@ -41,6 +43,14 @@ export default function (context, inject) {
         '(cities)'
       ]
     });
+
+    autoComplete.addListener('place_changed', () => {
+      const place = autoComplete.getPlace();
+      input.dispatchEvent(new CustomEvent('changed', {
+        detail: place,
+      }));
+      console.log('maps.client.js@:48', place, input);
+    })
   }
 
   function showMap(canvas, lat, lng) {
