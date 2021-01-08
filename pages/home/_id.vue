@@ -2,24 +2,27 @@
   <div>
     <div style="display: flex">
       <img
-          v-for="image in home.images"
-          :src="image"
-          :key="image"
-          width="200"
-          height="150"
-      >
+        v-for="image in home.images"
+        :src="image"
+        :key="image"
+        width="200"
+        height="150"
+      />
     </div>
     {{ home.title }}<br />
-    ${{ home.pricePerNight }} / night<br /> <img
+    ${{ home.pricePerNight }} / night<br />
+    <img
       src="/images/marker.svg"
       width="20"
       height="20"
-  >
-    {{ home.location.address }} {{ home.location.city }} {{ home.location.state }} {{ home.country }}<br /> <img
-      src="/images/star.svg"
-      width="20"
-      height="20"
-  >{{ home.reviewValue }}<br />
+    />
+    {{ home.location.address }} {{ home.location.city }} {{ home.location.state }} {{ home.country }}<br />
+    <img
+        src="/images/star.svg"
+        width="20"
+        height="20"
+    />
+    {{ home.reviewValue }}<br />
     {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds, {{ home.bathrooms }} bath<br />
     {{ home.description }}
 
@@ -28,11 +31,10 @@
     <div v-for="review in reviews" :key="review.objectID">
       <img
           :src="review.reviewer.image"
-      >
+      />
       {{ review.reviewer.name }}<br/>
       {{ formatDate(review.date) }}<br/>
-      <short-text :text="review.comment" :target="150" />
-      <br/>
+      <short-text :text="review.comment" :target="150" /><br/>
     </div>
 
     <img :src="user.image" /><br/>
@@ -45,17 +47,22 @@
 
 <script>
 import ShortText from '@/components/ShortText';
+
 export default {
   components: {ShortText},
   head() {
     return {
       title: this.home.title,
-    }
+    };
   },
   mounted() {
     this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng);
   },
-  async asyncData({ params, $dataApi, error }) {
+  async asyncData({
+    params,
+    $dataApi,
+    error,
+  }) {
     const responses = await Promise.all([
       $dataApi.getHome(params.id),
       $dataApi.getReviewsByHomeId(params.id),
@@ -68,14 +75,14 @@ export default {
       return error({
         statusCode: homeResponse.status,
         message: homeResponse.statusText,
-      })
+      });
     }
 
     return {
       home: responses[0].json,
       reviews: responses[1].json.hits,
       user: responses[2].json.hits[0],
-    }
+    };
   },
 
   methods: {
@@ -85,7 +92,7 @@ export default {
         month: 'long',
         year: 'numeric',
       });
-    }
+    },
   },
 };
 </script>
