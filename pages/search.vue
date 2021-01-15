@@ -3,11 +3,15 @@
     Results for {{ label }}<br/>
     <div style="height: 800px; width: 800px;float: right;" ref="map"></div>
     <div v-if="homes.length > 0">
-      <HomeRow
+      <nuxt-link
           v-for="home in homes"
           :key="home.objectID"
-          :home="home"
-      />
+          :to="`/home/${home.objectID}`"
+      >
+        <HomeRow
+            :home="home"
+        />
+      </nuxt-link>
     </div>
     <div v-else>
       No Results Found
@@ -48,8 +52,16 @@ export default {
   },
 
   methods: {
+    getHomeMarkers() {
+      return this.homes.map(home => {
+        return {
+          ...home._geoloc,
+        };
+      });
+    },
+
     updateMap() {
-      this.$maps.showMap(this.$refs.map, this.lat, this.lng);
+      this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers());
     },
   },
 }
