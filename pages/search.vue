@@ -56,6 +56,7 @@ export default {
       return this.homes.map(home => {
         return {
           ...home._geoloc,
+          pricePerNight: home.pricePerNight,
         };
       });
     },
@@ -67,6 +68,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+.marker {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  font-weight: bold;
+  padding: 5px 8px;
+}
 </style>
