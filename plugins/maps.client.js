@@ -67,6 +67,13 @@ export default function (context, inject) {
       center: new window.google.maps.LatLng(lat, lng),
       disableDefaultUI: true,
       zoomControl: true,
+      styles: [{
+        featureType: 'poi.business',
+        elementType: 'labels.icon',
+        stylers: [{
+          visibility: 'off',
+        }]
+      }],
     };
 
     const map = new window.google.maps.Map(canvas, mapOptions);
@@ -81,9 +88,10 @@ export default function (context, inject) {
     markers.forEach(home => {
       const position = new window.google.maps.LatLng(home.lat, home.lng);
       const marker = new window.google.maps.Marker({
+        clickable: false,
         icon: 'https://maps.gstatic.com/mapfiles/transparent.png',
         label: {
-          className: 'marker',
+          className: `marker home-${home.id}`,
           text: `$${home.pricePerNight}`,
         },
         position,

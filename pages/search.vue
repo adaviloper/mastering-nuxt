@@ -10,6 +10,8 @@
       >
         <HomeRow
             :home="home"
+            @mouseover.native="hightlightMarker(home.objectID, true)"
+            @mouseout.native="hightlightMarker(home.objectID, false)"
         />
       </nuxt-link>
     </div>
@@ -52,17 +54,21 @@ export default {
   },
 
   methods: {
+    hightlightMarker(homeId, isHighlighted) {
+      document.getElementsByClassName(`home-${homeId}`)[0]?.classList?.toggle('marker-highlight', isHighlighted);
+    },
+    updateMap() {
+      this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers());
+    },
+
     getHomeMarkers() {
       return this.homes.map(home => {
         return {
           ...home._geoloc,
           pricePerNight: home.pricePerNight,
+          id: home.objectID,
         };
       });
-    },
-
-    updateMap() {
-      this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers());
     },
   },
 }
@@ -75,5 +81,11 @@ export default {
   border-radius: 20px;
   font-weight: bold;
   padding: 5px 8px;
+}
+
+.marker-highlight {
+  background-color: black;
+  border-color: black;
+  color: white !important;
 }
 </style>
