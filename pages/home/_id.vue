@@ -1,63 +1,41 @@
 <template>
   <div>
-    <div style="display: flex">
-      <img
-        v-for="image in home.images"
-        :src="image"
-        :key="image"
-        width="200"
-        height="150"
-      />
-    </div>
-    {{ home.title }}<br />
-    ${{ home.pricePerNight }} / night<br />
-    <img
-      src="/images/marker.svg"
-      width="20"
-      height="20"
-    />
-    {{ home.location.address }} {{ home.location.city }} {{ home.location.state }} {{ home.country }}<br />
-    <img
-        src="/images/star.svg"
-        width="20"
-        height="20"
-    />
-    {{ home.reviewValue }}<br />
-    {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds, {{ home.bathrooms }} bath<br />
-    {{ home.description }}
-
-    <div style="height: 800px; width: 800px;" ref="map"></div>
-
-    <div v-for="review in reviews" :key="review.objectID">
-      <img
-          :src="review.reviewer.image"
-      />
-      {{ review.reviewer.name }}<br/>
-      {{ formatDate(review.date) }}<br/>
-      <short-text :text="review.comment" :target="150" /><br/>
-    </div>
-
-    <img :src="user.image" /><br/>
-    {{ user.name }}<br/>
-    {{ formatDate(user.joined) }}<br/>
-    {{ user.reviewCount }}<br/>
-    {{ user.description }}<br/>
+    <PropertyGallery :images="home.images"/>
+    <PropertyDetails :home="home"/>
+    <PropertyDescription :home="home"/>
+    <PropertyMap :home="home"/>
+    <PropertyReviews :reviews="reviews"/>
+    <PropertyHost :user="user"/>
   </div>
 </template>
 
 <script>
 import ShortText from '@/components/ShortText';
+import PropertyGallery from '@/components/PropertyGallery';
+import PropertyDetails from '@/components/PropertyDetails';
+import PropertyDescription from '@/components/PropertyDescription';
+import PropertyMap from '@/components/PropertyMap';
+import PropertyReviews from '@/components/PropertyReviews';
+import PropertyHost from '@/components/PropertyHost';
+import shortDate from '@/utils/shortDate';
 
 export default {
-  components: {ShortText},
+  components: {
+    PropertyDescription,
+    PropertyDetails,
+    PropertyGallery,
+    PropertyMap,
+    PropertyReviews,
+    PropertyHost,
+    ShortText,
+  },
+
   head() {
     return {
       title: this.home.title,
     };
   },
-  mounted() {
-    this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng);
-  },
+
   async asyncData({
     params,
     $dataApi,
@@ -86,13 +64,7 @@ export default {
   },
 
   methods: {
-    formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString(undefined, {
-        month: 'long',
-        year: 'numeric',
-      });
-    },
+    shortDate,
   },
 };
 </script>

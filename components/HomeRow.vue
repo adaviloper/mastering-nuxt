@@ -1,20 +1,31 @@
 <template>
-  <div style="clear: left;">
-    <img :src="home.images[0]" style="width: 200px;float: left; padding: 10px;" /><br/>
-    {{ home.title }}<br/>
-    {{ home.location.address }} {{ home.location.city }} {{ home.location.state }}<br/>
-    {{ pluralize(home.guests, 'guest') }}, {{ pluralize(home.bedrooms, 'bedroom') }}, {{ pluralize(home.beds, 'bed') }}, {{ pluralize(home.bathrooms, 'bathroom') }}<br/>
-    {{ home.pricePerNight }} / night<br/>
-    <img
-        src="/images/star.svg"
-        width="20"
-        height="20"
-    />
-    {{ home.reviewValue }} ({{ home.reviewCount }})<br />
+  <div>
+    <div class="app-house">
+      <div class="app-house-header" :style="`background-image:url(${home.images[0]});`"></div>
+      <div class="app-house-body">
+        <img src="~/assets/images/icons/heart.svg" class="app-fav" />
+        <h2>{{ home.title }}</h2>
+        <div class="app-address">
+          {{ home.location.address }} {{ home.location.city }} {{ home.location.state }}<br/>
+        </div>
+        <div class="app-amenities">
+          <p>
+            {{ pluralize(home.guests, 'guest') }}, {{ pluralize(home.bedrooms, 'bedroom') }}, {{ pluralize(home.beds, 'bed') }}, {{ pluralize(home.bathrooms, 'bathroom') }}<br/>
+          </p>
+          <p>{{ features }}</p>
+        </div>
+        <div class="app-flex">
+          <div class="app-rating">{{ home.reviewValue }} <span>({{ home.reviewCount }}</span></div>
+          <div class="app-price">${{ home.pricePerNight }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import pluralize from '~/utils/pluralize';
+
 export default {
   props: {
     home: {
@@ -23,21 +34,16 @@ export default {
     }
   },
 
-  methods: {
-    pluralize(number, singularWord) {
-      const text = `${number} ${singularWord}`
-      if (number === 1) {
-        return text;
-      }
+  computed: {
+    features() {
+      return this.home.features.slice(0, 3).join(',');
+    }
+  },
 
-      return text + 's';
-    },
+  methods: {
+    pluralize,
   }
 };
 </script>
 
-<style scoped>
-img {
-  width: 200px;
-}
-</style>
+<style scoped></style>

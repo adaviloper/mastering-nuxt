@@ -1,8 +1,31 @@
 <template>
-  <div>
-    <header>
-      <nuxt-link :to="{name: 'index'}">Home</nuxt-link>
-      <input type="text" ref="citySearch" @changed="changed" />
+  <div class="app">
+    <header class="app-header">
+      <div class="app-logo">
+        <img
+          src="~/assets/images/logo.svg"
+        >
+      </div>
+      <div class="app-search">
+        <input type="text" @change="changed" placeholder="Enter your address">
+        <input type="text" class="datepicker" placeholder="Check in">
+        <input type="text" class="datepicker" placeholder="Check out">
+        <button>
+          <img
+              src="~/assets/images/icons/search.svg"
+          >
+        </button>
+      </div>
+      <div class="app-user-menu">
+        <img
+            src="~/assets/images/icons/house.svg"
+        >
+        <div class="name">Host</div>
+        <img
+            src="~/assets/images/user.jpg"
+            class="avatar"
+        >
+      </div>
     </header>
     <nuxt />
   </div>
@@ -36,8 +59,4 @@ export default {
 };
 </script>
 
-<style scoped>
-header {
-  background-color: #eeeeee;
-}
-</style>
+<style scoped></style>
