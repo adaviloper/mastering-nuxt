@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "nuxt": "^2.14.7"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^3.4.2"
   }
 }

@@ -1,4 +1,8 @@
 export default {
+  buildModules: [
+    '@nuxtjs/tailwindcss'
+  ],
+
   components: true,
 
   head: {
@@ -15,6 +19,8 @@ export default {
       }
     ]
   },
+
+  modules: [],
 
   plugins: [
     '~/plugins/maps.client',
