@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "nuxt": "^2.14.7"
   },
   "devDependencies": {

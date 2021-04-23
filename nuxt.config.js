@@ -36,7 +36,18 @@ export default {
   plugins: [
     '~/plugins/maps.client',
     '~/plugins/dataApi',
+    '~/plugins/auth.client',
   ],
+
+  publicRuntimeConfig: {
+    auth: {
+      cookieName: 'idToken',
+      clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
+    },
+  },
+
+  privateRuntimeConfig: {
+  },
 
   router: {
     prefetchLinks: false,
