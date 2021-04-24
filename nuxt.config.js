@@ -31,7 +31,9 @@ export default {
     ]
   },
 
-  modules: [],
+  modules: [
+    '~/modules/auth',
+  ],
 
   plugins: [
     '~/plugins/maps.client',
