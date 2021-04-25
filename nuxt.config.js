@@ -64,6 +64,13 @@ export default {
     prefetchLinks: false,
   },
 
+  serverMiddleware: [
+    function(request, response, next) {
+      console.log('nuxt.config.js@:69', request.body);
+      next();
+    }
+  ],
+
   env: {
     algolia: {
       appId: process.env.ALGOLIA_APP_ID,

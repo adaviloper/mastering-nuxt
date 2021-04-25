@@ -1,5 +1,6 @@
 .DS_Store
+.env
 .idea
 .nuxt
+http/http-client.private.env.json
 node_modules
-.env
