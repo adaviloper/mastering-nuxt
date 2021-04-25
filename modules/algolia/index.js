@@ -1,12 +1,10 @@
 import fetch from 'node-fetch';
-import { unWrap, getErrorResponse } from '../utils/fetchUtils';
+import { unWrap, getErrorResponse } from '../../utils/fetchUtils';
+import { getHeaders } from './helpers';
 
 export default function() {
   const algoliaConfig = this.options.privateRuntimeConfig.algolia;
-  const headers = {
-    "X-Algolia-API-Key": algoliaConfig.apiKey,
-    "X-Algolia-Application-Id": algoliaConfig.appId
-  };
+  const headers = getHeaders(algoliaConfig);
 
   this.nuxt.hook('render:setupMiddleware', (app) => {
     app.use('/api/user', getUserRoute);
