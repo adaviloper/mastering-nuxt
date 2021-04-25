@@ -14,8 +14,6 @@ export default function() {
       return rejectHit(response);
     }
 
-    console.log('auth.js@handler:10', request.originalUrl);
-    console.log(idToken);
     const ticket = await getUser(idToken);
     request.identity = {
       id: ticket.sub,

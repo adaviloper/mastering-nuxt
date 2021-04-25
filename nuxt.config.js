@@ -33,6 +33,7 @@ export default {
 
   modules: [
     '~/modules/auth',
+    '~/modules/algolia',
   ],
 
   plugins: [
@@ -42,6 +43,10 @@ export default {
   ],
 
   publicRuntimeConfig: {
+    algolia: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_API_KEY,
+    },
     auth: {
       cookieName: 'idToken',
       clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
@@ -49,6 +54,10 @@ export default {
   },
 
   privateRuntimeConfig: {
+    algolia: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_PRIVATE_API_KEY,
+    },
   },
 
   router: {

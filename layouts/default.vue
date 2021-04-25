@@ -7,7 +7,7 @@
         >
       </div>
       <div class="app-search">
-        <input type="text" @change="changed" placeholder="Enter your address">
+        <input type="text" ref="citySearch" @changed="changed" placeholder="Enter your address">
         <input type="text" class="datepicker" placeholder="Check in">
         <input type="text" class="datepicker" placeholder="Check out">
         <button>

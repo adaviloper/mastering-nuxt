@@ -10,8 +10,8 @@
         >
           <HomeRow
               :home="home"
-              @mouseover.native="hightlightMarker(home.objectID, true)"
-              @mouseout.native="hightlightMarker(home.objectID, false)"
+              @mouseover.native="highlightMarker(home.objectID, true)"
+              @mouseout.native="highlightMarker(home.objectID, false)"
           />
         </nuxt-link>
       </div>
@@ -55,7 +55,7 @@ export default {
   },
 
   methods: {
-    hightlightMarker(homeId, isHighlighted) {
+    highlightMarker(homeId, isHighlighted) {
       document.getElementsByClassName(`home-${homeId}`)[0]?.classList?.toggle('marker-highlight', isHighlighted);
     },
     updateMap() {
