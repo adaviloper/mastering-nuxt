@@ -65,10 +65,6 @@ export default {
   },
 
   serverMiddleware: [
-    function(request, response, next) {
-      console.log('nuxt.config.js@:69', request.body);
-      next();
-    }
   ],
 
   env: {
