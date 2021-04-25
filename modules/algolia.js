@@ -39,7 +39,7 @@ export default function() {
 
   async function getUserById(userId) {
     try {
-      return unWrap(await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/users/${identity.id}`, {
+      return unWrap(await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/users/${userId}`, {
         headers,
       }));
     } catch (error) {

@@ -3,7 +3,7 @@
     <header class="app-header">
       <div class="app-logo">
         <img
-          src="~/assets/images/logo.svg"
+          src="/images/logo.svg"
         >
       </div>
       <div class="app-search">
@@ -12,13 +12,13 @@
         <input type="text" class="datepicker" placeholder="Check out">
         <button>
           <img
-              src="~/assets/images/icons/search.svg"
+              src="/images/icons/search.svg"
           >
         </button>
       </div>
       <div class="app-user-menu">
         <template v-if="isLoggedIn">
-          <img src="~/assets/images/icons/house.svg" alt=""/>
+          <img src="/images/icons/house.svg" alt=""/>
           <div class="name">Host</div>
           <img :src="user.profileUrl" class="avatar" alt=""/>
         </template>
