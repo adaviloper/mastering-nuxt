@@ -14,7 +14,7 @@ export default function() {
 
   async function getUserRoute(request, response, next) {
     const identity = request.identity;
-    const userData = await getUserById(identity.id);
+    const userData = await getUserById(identity);
 
     if (userData.status === 200) {
       return sendJson(userData.json, response);
@@ -37,9 +37,9 @@ export default function() {
     }
   }
 
-  async function getUserById(userId) {
+  async function getUserById(identity) {
     try {
-      return unWrap(await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/users/${userId}`, {
+      return unWrap(await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/users/${identity.id}`, {
         headers,
       }));
     } catch (error) {

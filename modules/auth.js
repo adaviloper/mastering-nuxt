@@ -8,6 +8,13 @@ export default function() {
     app.use('/api', handler);
   });
 
+  this.nuxt.hook('render:setupMiddleware', (app) => {
+    app.use('/admin', (request, response, next) => {
+      response.spa = true;
+      next();
+    });
+  });
+
   async function handler(request, response, next) {
     const idToken = cookie.parse(request.headers.cookie)[authConfig.cookieName];
     if (!idToken) {
