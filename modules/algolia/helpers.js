@@ -4,3 +4,8 @@ export const getHeaders = (algoliaConfig) => {
     "X-Algolia-Application-Id": algoliaConfig.appId
   };
 }
+
+export const sendJson = (data, response) => {
+  response.setHeader('Content-Type', 'application/json');
+  response.end(JSON.stringify(data));
+}
